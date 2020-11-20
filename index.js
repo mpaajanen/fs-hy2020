@@ -43,9 +43,9 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms :n
 //     response.end(JSON.stringify(persons))
 //   })
 
-app.get('/', (req, res) => {
-    res.send('<h1>Puhelinluettelo</h1>')
-})
+// app.get('/', (req, res) => {
+//     res.send('<h1>Puhelinluettelo</h1>')
+// })
 
 app.get('/api/persons', (req, res) => {
     res.json(persons)

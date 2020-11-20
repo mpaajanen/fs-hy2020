@@ -22,6 +22,7 @@ const App = () => {
   }, [])
 
   const addPerson = (event) => {
+    console.log('Täällä käytiin', newName, newNum)
     event.preventDefault()
     const personObj = {
       name: newName,
@@ -32,12 +33,21 @@ const App = () => {
       if(window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
         const personFound = persons.find(person => person.name === newName)
         const id = personFound.id
+        console.log(personFound, id)
         personService
          .update(id, personObj)
          .then(returnedPerson => {
+           console.log(returnedPerson)
            setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
-         })
+           setErrorMessage(
+            `${newName} was modified!`
+            )
+            setTimeout(() => {
+              setErrorMessage(null)
+            }, 2000)
+          })
          .catch(error => {
+            console.log(error)
             setErrorMessage(
               `${newName} has been removed by someone!`
             )
@@ -46,31 +56,45 @@ const App = () => {
             }, 2000)
             setPersons(persons.filter(person => person.id !== id))
         })
-        setErrorMessage(
-          `${newName} was modified!`
-        )
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 2000)
       }
       // alert(`${newName} is already added to phonebook!`)
       setNewName('')
       setNewNum('')
     } 
     else {
-      personService
-        .create(personObj)
-        .then(returnedPerson => {
-          setPersons(persons.concat(returnedPerson))
-          setNewName('')
-          setNewNum('')
-        })
+      if(!newName) {
         setErrorMessage(
-          `${newName} was added!`
+          'Fill the name field'
         )
         setTimeout(() => {
           setErrorMessage(null)
         }, 2000)
+
+      }
+      else if(!newNum) {
+        setErrorMessage(
+          'Fill the number field'
+        )
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 2000)
+      }
+      else {
+        console.log('lisättiin uusi')
+        personService
+          .create(personObj)
+          .then(returnedPerson => {
+            setPersons(persons.concat(returnedPerson))
+            setNewName('')
+            setNewNum('')
+          })
+          setErrorMessage(
+            `${newName} was added!`
+          )
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 2000)
+      }
     }
   }
 

@@ -56,7 +56,6 @@ const App = () => {
             setPersons(persons.filter(person => person.id !== id))
         })
       }
-      // alert(`${newName} is already added to phonebook!`)
     } 
     else {
       personService
@@ -71,15 +70,12 @@ const App = () => {
         }, 2000)
         })
       .catch(error => {
-        // console.log('kukkuu', error.response.data.error)
         setErrorMessage(
-          // error.response.data
           `${error.response.data.error}`
         )
         setTimeout(() => {
           setErrorMessage(null)
         }, 5000)
-        // console.log(error.response.data)
       })
     }
   setNewName('')

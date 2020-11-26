@@ -9,29 +9,29 @@ app.use(cors())
 app.use(express.json())
 app.use(express.static('build'))
 
-let persons = [
-      { 
-        "name": "Arto Hellas", 
-        "number": "040-123456",
-        "id": 1
-      },
-      { 
-        "name": "Ada Lovelace", 
-        "number": "39-44-5323523",
-        "id": 2
-      },
-      { 
-        "name": "Dan Abramov", 
-        "number": "12-43-234345",
-        "id": 3
-      },
-      { 
-        "name": "Mary Poppendieck", 
-        "number": "39-23-6423122",
-        "id": 4
-      }
-    ]
-const sumOfPersons = persons.length
+// let persons = [
+//   {
+//     'name': 'Arto Hellas',
+//     'number': '040-123456',
+//     'id': 1
+//   },
+//   {
+//     'name': 'Ada Lovelace',
+//     'number': '39-44-5323523',
+//     'id': 2
+//   },
+//   {
+//     'name': 'Dan Abramov',
+//     'number': '12-43-234345',
+//     'id': 3
+//   },
+//   {
+//     'name': 'Mary Poppendieck',
+//     'number': '39-23-6423122',
+//     'id': 4
+//   }
+// ]
+// const sumOfPersons = persons.length
 
 morgan.token('nimi', function tt (req) {
   return JSON.stringify(req.body)
@@ -71,6 +71,7 @@ app.get('/api/persons/:id', (req, res, next) => {
 app.delete('/api/persons/:id', (req, res, next) => {
   Person
     .findByIdAndRemove(req.params.id)
+    // eslint-disable-next-line no-unused-vars
     .then(result => {
       res.status(204).end()
     })
@@ -80,10 +81,10 @@ app.delete('/api/persons/:id', (req, res, next) => {
 
 })
 
-const randomId = () => {
-  const randId = Math.floor(Math.random() * Math.floor(1000000))
-  return randId
-}
+// const randomId = () => {
+//   const randId = Math.floor(Math.random() * Math.floor(1000000))
+//   return randId
+// }
 
 app.put('/api/persons/:id', (req, res, next) => {
   const body = req.body
@@ -105,24 +106,25 @@ app.post('/api/persons', (req, res, next) => {
   // app.get('/api/persons', (req, res) => {
   //   persons = res.json(persons)
   // })
-  const names = persons.map(person => person.name)
+
+  // const names = persons.map(person => person.name)
 
   const person = req.body
   // if (!person.name) {
-  //   return res.status(400).json({ 
-  //     error: 'Name missing' 
+  //   return res.status(400).json({
+  //     error: 'Name missing'
   //   })
   //   .catch(error => next(error))
   // }
   // if (!person.number) {
-  //   return res.status(400).json({ 
-  //     error: 'Number missing' 
+  //   return res.status(400).json({
+  //     error: 'Number missing'
   //   })
   //   .catch(error => next(error))
   // }
   // if(names.includes(person.name)) {
-  //   return res.status(400).json({ 
-  //     error: `${person.name} already found in phonebook` 
+  //   return res.status(400).json({
+  //     error: `${person.name} already found in phonebook`
   //   })
   //   .catch(error => next(error))
   // }
@@ -157,6 +159,7 @@ const errorHandler = (error, req, res, next) => {
 
 app.use(errorHandler)
 
+// eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)

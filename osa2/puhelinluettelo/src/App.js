@@ -22,7 +22,6 @@ const App = () => {
   }, [])
 
   const addPerson = (event) => {
-    console.log('Täällä käytiin', newName, newNum)
     event.preventDefault()
     const personObj = {
       name: newName,
@@ -58,44 +57,33 @@ const App = () => {
         })
       }
       // alert(`${newName} is already added to phonebook!`)
-      setNewName('')
-      setNewNum('')
     } 
     else {
-      if(!newName) {
+      personService
+      .create(personObj)
+      .then(returnedPerson => {
+        setPersons(persons.concat(returnedPerson))
         setErrorMessage(
-          'Fill the name field'
+          `${newName} was added!`
         )
         setTimeout(() => {
           setErrorMessage(null)
         }, 2000)
-
-      }
-      else if(!newNum) {
+        })
+      .catch(error => {
+        // console.log('kukkuu', error.response.data.error)
         setErrorMessage(
-          'Fill the number field'
+          // error.response.data
+          `${error.response.data.error}`
         )
         setTimeout(() => {
           setErrorMessage(null)
-        }, 2000)
-      }
-      else {
-        console.log('lisättiin uusi')
-        personService
-          .create(personObj)
-          .then(returnedPerson => {
-            setPersons(persons.concat(returnedPerson))
-            setNewName('')
-            setNewNum('')
-          })
-          setErrorMessage(
-            `${newName} was added!`
-          )
-          setTimeout(() => {
-            setErrorMessage(null)
-          }, 2000)
-      }
+        }, 5000)
+        // console.log(error.response.data)
+      })
     }
+  setNewName('')
+  setNewNum('')
   }
 
   const personsToShow = showAll
@@ -126,12 +114,6 @@ const App = () => {
         .then(
           setPersons(persons.filter(person => person.id !== id))
           )
-          setErrorMessage(
-            `${deletedPerson.name} was removed!`
-          )
-          setTimeout(() => {
-            setErrorMessage(null)
-          }, 2000)
       }
   }
   

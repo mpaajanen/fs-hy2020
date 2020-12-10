@@ -1,17 +1,12 @@
 {
-  "name": "puhluettelobackend",
+  "name": "blogilista",
   "version": "0.0.1",
-  "description": "Fullstack-tehtävät 3 - Puhelinluettelon backend",
+  "description": "Fullstack HY-2020 - Osan 4 tehtävät",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \\\"Error: no test specified\\\" && exit 1",
-    "build:ui": "rm -rf build && cd osa2/puhelinluettelo && npm run build --prod && cp -r build ../../",
-    "deploy": "git push heroku main",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
-    "logs:prod": "heroku logs --tail",
-    "lint": "eslint ."
+    "test": "jest --verbose"
   },
   "repository": {
     "type": "git",
@@ -25,6 +20,7 @@
   "homepage": "https://github.com/mpaajanen/fs-hy2020#readme",
   "devDependencies": {
     "eslint": "^7.14.0",
+    "jest": "^26.6.3",
     "nodemon": "^2.0.6"
   },
   "dependencies": {

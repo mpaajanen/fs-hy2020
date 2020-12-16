@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const blogsRouter = require('express').Router()
 const { response } = require('express')
 const { request } = require('../app')

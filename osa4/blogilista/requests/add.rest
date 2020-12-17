@@ -1,10 +1,10 @@
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pa2tvcGFhIiwiaWQiOiI1ZmQ5ZWYzN2ZkODg4OTM3NGMxMzQwOWEiLCJpYXQiOjE2MDgyMDM0ODZ9.52m7G9xNV02GMKHU5dZq4g5eUHj5PHqLSZk_fje25bk
 
-  {
-    "title": "Type wars",
-    "author": "Robert C. Martin",
-    "url": "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
-    "likes": 2,
-    "userId": "5fd9ef37fd8889374c13409a"
-  }  
+{
+  "title": "Login vaadittu",
+  "author": "Bob Dylan",
+  "url": "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
+  "likes": 20
+}  

@@ -9,6 +9,36 @@ const blog_helper = require('../utils/blog_helper')
 
 const api = supertest(app)
 
+describe('Tehtävät 4.5 - 4.7', () => {
+  test('4.5 - most liked blog', async () => {
+    const mostLiked = {
+      title: 'React patterns',
+      author: 'Michael Chan',
+      likes: 7
+    }
+    const fav = await blog_helper.favouriteBlog()
+    expect(fav).toEqual(mostLiked)
+  })
+
+  test('4.6 - most blogs by author', async () => {
+    const mostBlogsByAuthor = {
+      author: 'Edsger W. Dijkstra',
+      blogs: 2
+    }
+    const result = await blog_helper.mostBlogs()
+    expect(result).toEqual(mostBlogsByAuthor)
+  })
+
+  test('4.7 - most liked author', async () => {
+    const mostLikedAuthor = {
+      author: 'Michael Chan',
+      likes: 7
+    }
+    const result = await blog_helper.mostLikes()
+    expect(result).toEqual(mostLikedAuthor)
+  })
+})
+
 describe('Tehtävä 4.8', () => {
   test('blogs are returned as json', async () => {
     await api

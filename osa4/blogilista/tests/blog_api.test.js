@@ -54,6 +54,13 @@ describe('Tehtävä 4.8', () => {
 //   })
 })
 
+describe('Tehtävä 4.9', () => {
+  test('id is defined', async () => {
+    const blogs = await blog_helper.blogsInDb()
+    expect(blogs[0].id).toBeDefined()
+  })
+})
+
 describe('Tehtävä 4.10', () => {
   test('blog can be added', async () => {
     const blogsAtStart = await blog_helper.blogsInDb()

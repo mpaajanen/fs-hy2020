@@ -1,12 +1,19 @@
-POST http://localhost:3001/api/blogs
+PUT http://localhost:3001/api/blogs/5fca2d686a7a824358fc3d9f
 Content-Type: application/json
 # Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pa2tvcGFhIiwiaWQiOiI1ZmQ5ZWYzN2ZkODg4OTM3NGMxMzQwOWEiLCJpYXQiOjE2MDgyMDM0ODZ9.52m7G9xNV02GMKHU5dZq4g5eUHj5PHqLSZk_fje25bk
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI1ZmUwOTRjNzAxMTZmNDIzODBjMDg5MjEiLCJpYXQiOjE2MDg1NTM3NzR9.bWIwmDOeL0DUT-VJ28qN3Xfeb9LW0Rzmqli1_z6fxvI
 
 {
-  "title": "admin login",
-  "author": "Bob Dylan",
-  # "url": "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
-  "url": "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html"
-  # "likes": 20
+#   "title": "admin login",
+#   "author": "Bob Dylan",
+#   "url": "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
+  "likes": 7
 }  
+
+# {
+# "title": "React patterns",
+# "author": "Michael Chan",
+# "url": "https://reactpatterns.com/",
+# "likes": 7,
+# "id": "5fca2d686a7a824358fc3d9f"
+# }

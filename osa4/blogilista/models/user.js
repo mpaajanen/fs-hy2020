@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
 const mongoose = require('mongoose')
+const uniqueValidator = require('mongoose-unique-validator')
 
 const userSchema = mongoose.Schema({
-  username: String,
+  username: { type: String, unique: true },
   name: String,
   passwordHash: String,
   blogs: [
@@ -22,5 +24,7 @@ userSchema.set('toJSON', {
 })
 
 const User = mongoose.model('User', userSchema)
+
+userSchema.plugin(uniqueValidator)
 
 module.exports = User

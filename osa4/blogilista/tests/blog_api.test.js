@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt')
 const User = require('../models/user')
 
 const blog_helper = require('../utils/blog_helper')
-const { response } = require('express')
 const Blog = require('../models/blog')
 // const test_helper = require('../utils/test_helper')
 

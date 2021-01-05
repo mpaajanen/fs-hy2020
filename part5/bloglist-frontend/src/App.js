@@ -17,9 +17,10 @@ const App = () => {
   const [createVisible, setCreateVisible] = useState(false)
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )  
+    blogService.getAll().then(blogs => {
+      const sortedBlogs = blogs.sort((a,b) => b.likes - a.likes)
+      setBlogs( sortedBlogs )
+    })
   }, [])
 
   useEffect(() => {
@@ -77,15 +78,39 @@ const App = () => {
         setAuthor('')
         setUrl('')
       })
-      setErrorMessage(`new blog ${title} by ${author} added`)
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000)
+    setErrorMessage(`new blog ${title} by ${author} added`)
+    setTimeout(() => {
+      setErrorMessage(null)
+    }, 5000)
+  }
+
+  const likeAdder = (likedBlog, id) => {
+    console.log('Apista', likedBlog)
+    blogService
+      .update(id, likedBlog)
+      .then(() => {
+        setBlogs(blogs.map(blog => blog.id === id ? likedBlog : blog))
+      })
+    setErrorMessage(`${likedBlog.title} was liked`)
+    setTimeout(() => {
+      setErrorMessage(null)
+    }, 5000)
+  }
+
+  const handleRemove = (id) => {
+    console.log('poista', id)
+    if(window.confirm('Remove blog?')) {
+      blogService
+        .del(id)
+        .then(() => {
+          setBlogs(blogs.filter(blog => blog.id === id ? null : blog))
+        })
+    }
   }
 
   const blogForm = () => {
-    const hideWhenVisible = { display: createVisible ? 'none' : ''}
-    const showWhenVisible = { display: createVisible ? '' : 'none'}
+    const hideWhenVisible = { display: createVisible ? 'none' : '' }
+    const showWhenVisible = { display: createVisible ? '' : 'none' }
 
     return (
       <div>
@@ -116,21 +141,21 @@ const App = () => {
         <form onSubmit={handleLogin}>
           <div>
             username
-              <input
+            <input
               type="text"
               value={username}
               name="Username"
               onChange={({ target }) => setUsername(target.value)}
-              />
+            />
           </div>
           <div>
             password
-              <input
+            <input
               type="password"
               value={password}
               name="Password"
               onChange={({ target }) => setPassword(target.value)}
-              />
+            />
           </div>
           <button type="submit">login</button>
         </form>
@@ -151,7 +176,7 @@ const App = () => {
       {blogForm()}
       <div>
         {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} />
+          <Blog key={blog.id} blog={blog} likeAdder={likeAdder} handleRemove={handleRemove} user={user} />
         )}
       </div>
     </div>

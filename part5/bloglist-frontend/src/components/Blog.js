@@ -15,13 +15,11 @@ const Blog = ({ blog, likeAdder, handleRemove, user }) => {
   }
 
   const addLike = () => {
-    console.log('liketys', blog.id, blog.likes)
     const likedBlog = {
       ...blog,
       likes: blog.likes + 1,
       user: blog.user.id
     }
-    console.log(likedBlog)
     likeAdder(likedBlog, blog.id)
   }
 
@@ -29,13 +27,12 @@ const Blog = ({ blog, likeAdder, handleRemove, user }) => {
     handleRemove(blog.id)
   }
 
-  // console.log(blog)
   return (
     <div style={blogStyle}>
-      <div style={hideWhenVisible}>
+      <div style={hideWhenVisible} className='hidden'>
         {blog.title} {blog.author} <button onClick={toggleVisibility}>view</button>
       </div>
-      <div style={showWhenVisible}>
+      <div style={showWhenVisible} className='shown'>
         {blog.title} {blog.author} <button onClick={toggleVisibility}>hide</button><br />
         {blog.url}<br />
         likes: {blog.likes} <button onClick={addLike}>like</button><br />

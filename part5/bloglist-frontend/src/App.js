@@ -11,9 +11,6 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
   const [createVisible, setCreateVisible] = useState(false)
 
   useEffect(() => {
@@ -60,28 +57,19 @@ const App = () => {
     window.localStorage.removeItem('loggedBlogappUser')
   }
 
-  const handleCreate = (event) => {
-    event.preventDefault()
-    console.log('created new entry', title, author, url)
-
-    const blogObject = {
-      title: title,
-      author: author,
-      url: url
-    }
+  const handleCreate = (blogObject) => {
+    // console.log('created new entry', title, author, url)
 
     blogService
       .create(blogObject)
       .then(returnedBlog => {
         setBlogs(blogs.concat(returnedBlog))
-        setTitle('')
-        setAuthor('')
-        setUrl('')
+        setErrorMessage(`new blog ${returnedBlog.title} by ${returnedBlog.author} added`)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
       })
-    setErrorMessage(`new blog ${title} by ${author} added`)
-    setTimeout(() => {
-      setErrorMessage(null)
-    }, 5000)
+
   }
 
   const likeAdder = (likedBlog, id) => {
@@ -118,15 +106,7 @@ const App = () => {
           <button onClick={() => setCreateVisible(true)}>add blog</button>
         </div>
         <div style={showWhenVisible}>
-          <BlogForm
-            title={title}
-            author={author}
-            url={url}
-            handleTitleChange={({ target }) => setTitle(target.value)}
-            handleAuthorChange={({ target }) => setAuthor(target.value)}
-            handleUrlChange={({ target }) => setUrl(target.value)}
-            handleSubmit={handleCreate}
-          />
+          <BlogForm handleSubmit={handleCreate} />
           <button onClick={() => setCreateVisible(false)}>cancel</button>
         </div>
       </div>
